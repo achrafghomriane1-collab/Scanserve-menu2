@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ScanServe</title>
+<style>
+  * { box-sizing:border-box; }
+  body { font-family: Arial, sans-serif; background:#f5f5f5; margin:0; padding:0; }
+  .screen { display:none; padding:16px; padding-bottom:90px; min-height:100vh; }
+  .screen.active { display:block; }
+  h1 { text-align:center; color:#1a7a4c; font-size:22px; }
+  p.sub { text-align:center; color:#777; margin-top:-8px; }
+  .table-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:24px; }
+  .table-btn { background:white; border:2px solid #1a7a4c; color:#1aconst menu = {
+  traditional: [
+    { id: 't1', name: 'كسكس باللحم', price: 900, img: 'https://placehold.co/300x200?text=كسكس+باللحم' },
+    { id: 't2', name: 'كسكس بالدجاج', price: 750, img: 'https://placehold.co/300x200?text=كسكس+بالدجاج' },
+    { id: 't3', name: 'شخشوخة', price: 650, img: 'https://placehold.co/300x200?text=شخشوخة' },
+    { id: 't4', name: 'رشتة', price: 600, img: 'https://placehold.co/300x200?text=رشتة' },
+    { id: 't5', name: 'حمّص لبلابي', price: 400, img: 'https://placehold.co/300x200?text=لبلابي' },
+    { id: 't6', name: 'طاجين زيتون', price: 800, img: 'https://placehold.co/300x200?text=طاجين+زيتون' },
+    { id: 't7', name: 'مرقة لحم', price: 750, img: 'https://placehold.co/300x200?text=مرقة+لحم' },
+    { id: 't8', name: 'شربة فريك', price: 250, img: 'https://placehold.co/300x200?text=شربة+فريك' },
+    { id: 't9', name: 'دولمة', price: 700, img: 'https://placehold.co/300x200?text=دولمة' },
+    { id: 't10', name: 'برك بيضة', price: 150, img: 'https://placehold.co/300x200?text=برك' },
+    { id: 't11', name: 'مطلوع', price: 350, img: 'https://placehold.co/300x200?text=مطلوع' },
+    { id: 't12', name: 'خبز الدار محشو', price: 300, img: 'https://placehold.co/300x200?text=خبز+الدار' },
+    { id: 't13', name: 'كبدة مشوية', price: 700, img: 'https://placehold.co/300x200?text=كبدة+مشوية' },
+    { id: 't14', name: 'مرڨاز مشوي', price: 600, img: 'https://placehold.co/300x200?text=مرڨاز' },
+    { id: 't15', name: 'ملوخية', price: 650, img: 'https://placehold.co/300x200?text=ملوخية' },
+  ],
+  fast: [
+    { id: 'f1', name: 'بيتزا مارغريتا (صغيرة)', price: 500, img: 'https://placehold.co/300x200?text=بيتزا+مارغريتا' },
+    { id: 'f2', name: 'بيتزا خضار (وسط)', price: 800, img: 'https://placehold.co/300x200?text=بيتزا+خضار' },
+    { id: 'f3', name: 'بيتزا مشكلة (كبيرة)', price: 1200, img: 'https://placehold.co/300x200?text=بيتزا+مشكلة' },
+    { id: 'f4', name: 'برجر دجاج', price: 450, img: 'https://placehold.co/300x200?text=برجر+دجاج' },
+    { id: 'f5', name: 'برجر لحم دبل', price: 650, img: 'https://placehold.co/300x200?text=برجر+لحم' },
+    { id: 'f6', name: 'شاورما دجاج', price: 350, img: 'https://placehold.co/300x200?text=شاورما+دجاج' },
+    { id: 'f7', name: 'شاورما لحم', price: 450, img: 'https://placehold.co/300x200?text=شاورما+لحم' },
+    { id: 'f8', name: 'كريك دجاج', price: 400, img: 'https://placehold.co/300x200?text=كريك' },
+    { id: 'f9', name: 'تاكوس دجاج', price: 500, img: 'https://placehold.co/300x200?text=تاكوس' },
+    { id: 'f10', name: 'بانيني جبن', price: 300, img: 'https://placehold.co/300x200?text=بانيني' },
+    { id: 'f11', name: 'ساندويتش تونة', price: 300, img: 'https://placehold.co/300x200?text=ساندويتش+تونة' },
+    { id: 'f12', name: 'ساندويتش مرقاز', price: 350, img: 'https://placehold.co/300x200?text=ساندويتش+مرقاز' },
+    { id: 'f13', name: 'فرايت (بطاطا)', price: 150, img: 'https://placehold.co/300x200?text=فرايت' },
+    { id: 'f14', name: 'ناغتس دجاج (6 قطع)', price: 400, img: 'https://placehold.co/300x200?text=ناغتس' },
+    { id: 'f15', name: 'كباب', price: 450, img: 'https://placehold.co/300x200?text=كباب' },
+  ],
+  drinks: [
+    { id: 'd1', name: 'عصير برتقال طازج', price: 150, img: 'https://placehold.co/300x200?text=عصير+برتقال' },
+    { id: 'd2', name: 'عصير ليمون نعناع', price: 150, img: 'https://placehold.co/300x200?text=ليمون+نعناع' },
+    { id: 'd3', name: 'عصير مانجو/أناناس', price: 180, img: 'https://placehold.co/300x200?text=مانجو' },
+    { id: 'd4', name: 'كوكتيل فواكه', price: 250, img: 'https://placehold.co/300x200?text=كوكتيل' },
+    { id: 'd5', name: 'قهوة إكسبريس', price: 100, img: 'https://placehold.co/300x200?text=قهوة' },
+    { id: 'd6', name: 'كابوتشينو', price: 150, img: 'https://placehold.co/300x200?text=كابوتشينو' },
+    { id: 'd7', name: 'شاي بالنعناع', price: 100, img: 'https://placehold.co/300x200?text=شاي' },
+    { id: 'd8', name: 'مياه معدنية 0.5L', price: 50, img: 'https://placehold.co/300x200?text=مياه' },
+    { id: 'd9', name: 'مشروب غازي', price: 100, img: 'https://placehold.co/300x200?text=مشروب+غازي' },
+    { id: 'd10', name: 'ميلك شيك', price: 250, img: 'https://placehold.co/300x200?text=ميلك+شيك' },
+  ]
+};for (let i = 1; i <= 12; i++) {
+  const btn = document.createElement('div');
+  btn.className = 'table-btn';
+  btn.textContent = i;
+  btn.onclick = () => selectTable(i, btn);
+  document.getElementById('tableGrid').appendChild(btn);
+}
+
+function selectTable(num, btnEl) {
+  selectedTable = num;
+  document.querySelectorAll('.table-btn').forEach(b => b.classList.remove('selected'));
+  btnEl.classList.add('selected');
+  document.getElementById('confirmTableBtn').disabled = false;
+}
+
+function goToCategories() {
+  document.getElementById('tableLabel').textContent = 'الطاولة رقم ' + selectedTable;
+  showScreen('screen-categories');
+}
+
+function openCategory(cat) {
+  const titles = { traditional: 'أكل تقليدي', fast: 'أكل سريع', drinks: 'مشروبات' };
+  document.getElementById('categoryTitle').textContent = titles[cat];
+  const list = document.getElementById('dishList');
+  list.innerHTML = '';
+  menu[cat].forEach(dish => {
+    const qty = cart[dish.id] || 0;
+    const card = document.createElement('div');
+    card.className = 'dish-card';
+    card.innerHTML = `
+      <img src="${dish.img}">
+      <div class="dish-info">
+        <h3>${dish.name}</h3>
+        <div class="dish-row">
+          <span class="price">${dish.price} دج</span>
+          <div class="qty-box">
+            <button onclick="changeQty('${dish.id}', -1)">−</button>
+            <span id="qty-${dish.id}">${qty}</span>
+            <button onclick="changeQty('${dish.id}', 1)">+</button>
+          </div>
+        </div>
+      </div>`;
+    list.appendChild(card);
+  });
+  showScreen('screen-dishes');
+}
+
+function changeQty(id, delta) {
+  cart[id] = Math.max(0, (cart[id] || 0) + delta);
+  document.getElementById('qty-' + id).textContent = cart[id];
+  updateCartBar();
+}
+
+function updateCartBar() {
+  let total = 0, count = 0;
+  const allDishes = [...menu.traditional, ...menu.fast, ...menu.drinks];
+  for (let id in cart) {
+    if (cart[id] > 0) {
+      count += cart[id];
+      const dish = allDishes.find(d => d.id === id);
+      total += dish.price * cart[id];
+    }
+  }
+  const bar = document.getElementById('cartBar');
+  if (count > 0) {
+    bar.classList.add('show');
+    document.getElementById('cartTotal').textContent = total + ' دج (' + count + ')';
+  } else {
+    bar.classList.remove('show');
+  }
+}
+
+function sendOrder() {
+  showScreen('screen-confirm');
+  document.getElementById('cartBar').classList.remove('show');
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+</script>
+</body>
+</html>
