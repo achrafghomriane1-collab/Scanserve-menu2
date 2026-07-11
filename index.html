@@ -10,9 +10,11 @@
     <div id="app"></div>
     
     <div id="cart-modal" class="modal hidden">
-        <div class="modal-content" id="modal-container">
-            <span class="close-btn" onclick="closeCartModal()" style="float:right; cursor:pointer; font-size:24px;">&times;</span>
+        <div class="modal-content">
+            <span onclick="closeCartModal()" style="float:right; cursor:pointer; font-size:24px;">&times;</span>
             <div id="cart-items-list"></div>
+            <div id="modal-footer" style="margin-top:20px; font-weight:bold;"></div>
+            <button id="send-btn" onclick="sendOrder()" style="width:100%; margin-top:10px;">Envoyer la commande</button>
         </div>
     </div>
 
