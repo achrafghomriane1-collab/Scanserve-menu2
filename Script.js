@@ -80,3 +80,50 @@ const MenuDatabase = {
         { id: "d8", name: "Café / Thé", price: 150 }
     ]
 };
+
+const AppState = {
+    cart: JSON.parse(localStorage.getItem('cart')) || {},
+    save() { localStorage.setItem('cart', JSON.stringify(this.cart)); },
+    calculateTotal() {
+        return Object.values(this.cart).reduce((sum, item) => sum + (item.price * item.qty), 0);
+    }
+};
+
+function updateCart(name, price, change) {
+    if (!AppState.cart[name]) AppState.cart[name] = { qty: 0, price: price };
+    AppState.cart[name].qty += change;
+    if (AppState.cart[name].qty <= 0) delete AppState.cart[name];
+    AppState.save();
+    renderUI();
+}
+
+function renderUI() {
+    const app = document.getElementById('app');
+    app.innerHTML = "<h1>Menu - Istirahat El Kalitoussa</h1>" + Object.entries(MenuDatabase).map(([cat, items]) => `
+        <h2>${cat}</h2>
+        ${items.map(i => `<div class="menu-item">
+            <span>${i.name} ${i.bestSeller ? '<span class="best-seller">TOP</span>' : ''}</span>
+            <button onclick="updateCart('${i.name}', ${i.price}, 1)">+</button>
+        </div>`).join('')}
+    `).join('');
+    
+    const total = AppState.calculateTotal();
+    const footer = document.getElementById('cart-footer');
+    footer.classList.toggle('hidden', total === 0);
+    document.getElementById('total-price').innerText = total;
+}
+
+function showCartModal() {
+    const list = document.getElementById('cart-items-list');
+    list.innerHTML = "<h3>Votre Panier</h3>" + Object.entries(AppState.cart).map(([name, item]) => `
+        <div style="margin-bottom:10px;">
+            ${name} x ${item.qty} = ${item.price * item.qty} da
+        </div>
+    `).join('') + `<hr><strong>Total: ${AppState.calculateTotal()} da</strong>`;
+    document.getElementById('cart-modal').classList.remove('hidden');
+}
+
+function closeCartModal() { document.getElementById('cart-modal').classList.add('hidden'); }
+
+// التشغيل الأولي
+renderUI();
