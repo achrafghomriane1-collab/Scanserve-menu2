@@ -1,15 +1,27 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ScanServe</title>
-<style>
-  * { box-sizing:border-box; }
-  body { font-family: Arial, sans-serif; background:#f5f5f5; margin:0; padding:0; }
-  .screen { display:none; padding:16px; padding-bottom:90px; min-height:100vh; }
-  .screen.active { display:block; }
-  h1 { text-align:center; color:#1a7a4c; font-size:22px; }
-  p.sub { text-align:center; color:#777; margin-top:-8px; }
-  .table-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:24px; }
-  .table-btn { background:white; border:2px solid #1a7a4c; color:#1a
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Istirahat El Kalitoussa</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app"></div>
+    
+    <div id="cart-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeCartModal()">&times;</span>
+            <div id="cart-items-list"></div>
+            <div id="cart-actions"></div>
+        </div>
+    </div>
+
+    <div id="cart-footer" class="hidden" onclick="showCartModal()">
+        <span>🛒 Voir le panier</span>
+        <span id="total-price">0</span> da
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
