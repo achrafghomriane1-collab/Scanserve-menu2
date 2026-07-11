@@ -10,16 +10,14 @@
     <div id="app"></div>
     
     <div id="cart-modal" class="modal hidden">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeCartModal()">&times;</span>
+        <div class="modal-content" id="modal-container">
+            <span class="close-btn" onclick="closeCartModal()" style="float:right; cursor:pointer; font-size:24px;">&times;</span>
             <div id="cart-items-list"></div>
-            <div id="cart-actions"></div>
         </div>
     </div>
 
     <div id="cart-footer" class="hidden" onclick="showCartModal()">
-        <span>🛒 Voir le panier</span>
-        <span id="total-price">0</span> da
+        <span>🛒 Voir le panier</span> | <span id="total-price">0</span> da
     </div>
 
     <script src="script.js"></script>
