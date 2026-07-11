@@ -84,9 +84,7 @@ const MenuDatabase = {
 const AppState = {
     cart: JSON.parse(localStorage.getItem('cart')) || {},
     save() { localStorage.setItem('cart', JSON.stringify(this.cart)); },
-    calculateTotal() {
-        return Object.values(this.cart).reduce((sum, item) => sum + (item.price * item.qty), 0);
-    }
+    calculateTotal() { return Object.values(this.cart).reduce((s, i) => s + (i.price * i.qty), 0); }
 };
 
 function updateCart(name, price, change) {
@@ -99,31 +97,40 @@ function updateCart(name, price, change) {
 
 function renderUI() {
     const app = document.getElementById('app');
-    app.innerHTML = "<h1>Menu - Istirahat El Kalitoussa</h1>" + Object.entries(MenuDatabase).map(([cat, items]) => `
-        <h2>${cat}</h2>
-        ${items.map(i => `<div class="menu-item">
-            <span>${i.name} ${i.bestSeller ? '<span class="best-seller">TOP</span>' : ''}</span>
-            <button onclick="updateCart('${i.name}', ${i.price}, 1)">+</button>
-        </div>`).join('')}
-    `).join('');
+    let html = "<h1>Istirahat El Kalitoussa</h1>";
     
+    // استخدام حلقة For...in للتنقل عبر كل الأقسام
+    for (let category in MenuDatabase) {
+        html += `<h2>${category}</h2>`;
+        MenuDatabase[category].forEach(item => {
+            html += `
+                <div class="menu-item">
+                    <span>${item.name} ${item.bestSeller ? '<span class="best-seller">TOP</span>' : ''}</span>
+                    <button onclick="updateCart('${item.name}', ${item.price}, 1)">+</button>
+                </div>`;
+        });
+    }
+    
+    app.innerHTML = html;
+    
+    // تحديث شريط الطلب
     const total = AppState.calculateTotal();
     const footer = document.getElementById('cart-footer');
-    footer.classList.toggle('hidden', total === 0);
-    document.getElementById('total-price').innerText = total;
+    if (footer) {
+        footer.classList.toggle('hidden', total === 0);
+        document.getElementById('total-price').innerText = total;
+    }
 }
 
 function showCartModal() {
     const list = document.getElementById('cart-items-list');
     list.innerHTML = "<h3>Votre Panier</h3>" + Object.entries(AppState.cart).map(([name, item]) => `
-        <div style="margin-bottom:10px;">
-            ${name} x ${item.qty} = ${item.price * item.qty} da
-        </div>
-    `).join('') + `<hr><strong>Total: ${AppState.calculateTotal()} da</strong>`;
+        <div style="margin-bottom:10px;">${name} x ${item.qty} = ${item.price * item.qty} da</div>
+    `).join('');
     document.getElementById('cart-modal').classList.remove('hidden');
 }
 
 function closeCartModal() { document.getElementById('cart-modal').classList.add('hidden'); }
 
-// التشغيل الأولي
-renderUI();
+// استدعاء الدوال عند تحميل الصفحة
+window.onload = renderUI;
