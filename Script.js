@@ -1,83 +1,22 @@
 const MenuDatabase = {
     "ENTRÉES FROIDES": [
-        { id: "ef1", name: "Salade César", price: 700 },
-        { id: "ef2", name: "Salade Variée", price: 600 },
-        { id: "ef3", name: "Salade au Thon", price: 700 },
-        { id: "ef4", name: "Calamars Frits", price: 1500 },
+        { id: "ef1", name: "Salade César", price: 700 }, { id: "ef2", name: "Salade Variée", price: 600 },
+        { id: "ef3", name: "Salade au Thon", price: 700 }, { id: "ef4", name: "Calamars Frits", price: 1500 },
         { id: "ef5", name: "Scampi De Crevettes", price: 1100 }
-    ],
-    "ENTRÉES CHAUDES": [
-        { id: "eh1", name: "Soupe De Poisson", price: 600 },
-        { id: "eh2", name: "Gratin Poulet", price: 500 },
-        { id: "eh3", name: "Gratin Fruit De Mer", price: 600 },
-        { id: "eh4", name: "Omelette Crevettes", price: 800 },
-        { id: "eh5", name: "Beignets De Camembert", price: 600 }
     ],
     "POULETS": [
         { id: "p1", name: "Escalope à La Créme", price: 1200, bestSeller: true },
-        { id: "p2", name: "Vol Au Vent Sauce Pêcheur", price: 1400 },
-        { id: "p3", name: "Escalope Chiken Curry", price: 1100 },
-        { id: "p4", name: "Escalope Grillé", price: 900 },
-        { id: "p5", name: "Cordan Bleu", price: 1100 },
-        { id: "p6", name: "Wok De Poulet Façon thaï", price: 1200 }
-    ],
-    "SPÉCIALITÉ TUNISIENNE": [
-        { id: "st1", name: "Ojja Fruits De Mer", price: 1500 },
-        { id: "st2", name: "Ojjà Merguez", price: 1200 }
+        { id: "p2", name: "Vol Au Vent Sauce Pêcheur", price: 1400 }
     ],
     "GRILLADES": [
-        { id: "g1", name: "Filet De Boeuf Griller", price: 2200 },
-        { id: "g2", name: "Entre Côte Grillée", price: 1900 },
-        { id: "g3", name: "Côtelettes Grillées", price: 1900 },
-        { id: "g4", name: "Noisettes Grillées", price: 1800 },
-        { id: "g5", name: "Merguez Grillée", price: 1300 },
         { id: "g6", name: "Mixte Grillade", price: 4500, bestSeller: true }
     ],
-    "PÂTES": [
-        { id: "pa1", name: "Bolognaise", price: 1100 },
-        { id: "pa2", name: "Putanesca", price: 900 },
-        { id: "pa3", name: "4 Fromages", price: 1400 },
-        { id: "pa4", name: "Pasta Alfredo", price: 1100 },
-        { id: "pa5", name: "Crevette Sauce Pesto", price: 1600 },
-        { id: "pa6", name: "Pasta Fruit De Mer", price: 1800 }
-    ],
-    "PAELLA": [
-        { id: "pl1", name: "Paella Dimarisco", price: 2500 },
-        { id: "pl2", name: "Paella Valencienne", price: 3000 }
-    ],
     "PIZZAS": [
-        { id: "pz1", name: "Pizza Végétarienne", price: 700 },
-        { id: "pz2", name: "Pizza Margherita", price: 600 },
-        { id: "pz3", name: "Pizza Napolitaine", price: 700 },
-        { id: "pz4", name: "Pizza Poulet", price: 800 },
-        { id: "pz5", name: "Pizza Algéroise", price: 700 },
-        { id: "pz6", name: "Pizza Thon", price: 800 },
-        { id: "pz7", name: "Pizza Viande Hachée", price: 800 },
-        { id: "pz8", name: "Pizza Alpina", price: 900 },
-        { id: "pz9", name: "Pizza Capricieuse", price: 800 },
-        { id: "pz10", name: "Pizza Sauce Pesto", price: 1000 },
         { id: "pz11", name: "Pizza 4 Fromages", price: 1200 },
         { id: "pz12", name: "Pizza Fruits De Mer", price: 1400 }
     ],
-    "POISSONS": [
-        { id: "po1", name: "Crevettes Sauté À L'ail", price: 2200 },
-        { id: "po2", name: "Crevettes En Sauce", price: 2200 },
-        { id: "po3", name: "Calamares En Sauce", price: 1800 },
-        { id: "po4", name: "Dorade Grillée", price: 2200 },
-        { id: "po5", name: "Loup Grillée", price: 2200 },
-        { id: "po6", name: "Espadon Sauce Normande", price: 2600 },
-        { id: "po7", name: "Espadon Sauce Meunière", price: 2400 },
-        { id: "po8", name: "Crevettes Grillée", price: 2200 }
-    ],
     "DESSERTS & BOISSONS": [
-        { id: "d1", name: "Tiramisu", price: 400 },
-        { id: "d2", name: "Fondant au Chocolat", price: 400 },
-        { id: "d3", name: "Mousse au Chocolat", price: 400 },
-        { id: "d4", name: "Crème Brûlée", price: 400 },
-        { id: "d5", name: "Soda", price: 200 },
-        { id: "d6", name: "Jus Nature", price: 400 },
-        { id: "d7", name: "Virgin Mojito", price: 500 },
-        { id: "d8", name: "Café / Thé", price: 150 }
+        { id: "d1", name: "Tiramisu", price: 400 }, { id: "d8", name: "Café / Thé", price: 150 }
     ]
 };
 
@@ -98,39 +37,35 @@ function updateCart(name, price, change) {
 function renderUI() {
     const app = document.getElementById('app');
     let html = "<h1>Istirahat El Kalitoussa</h1>";
-    
-    // استخدام حلقة For...in للتنقل عبر كل الأقسام
-    for (let category in MenuDatabase) {
-        html += `<h2>${category}</h2>`;
-        MenuDatabase[category].forEach(item => {
-            html += `
-                <div class="menu-item">
-                    <span>${item.name} ${item.bestSeller ? '<span class="best-seller">TOP</span>' : ''}</span>
-                    <button onclick="updateCart('${item.name}', ${item.price}, 1)">+</button>
-                </div>`;
+    for (let cat in MenuDatabase) {
+        html += `<h2>${cat}</h2>`;
+        MenuDatabase[cat].forEach(i => {
+            html += `<div class="menu-item"><span>${i.name} ${i.bestSeller?'<span class="best-seller">TOP</span>':''}</span>
+            <button onclick="updateCart('${i.name}', ${i.price}, 1)">+</button></div>`;
         });
     }
-    
     app.innerHTML = html;
-    
-    // تحديث شريط الطلب
-    const total = AppState.calculateTotal();
-    const footer = document.getElementById('cart-footer');
-    if (footer) {
-        footer.classList.toggle('hidden', total === 0);
-        document.getElementById('total-price').innerText = total;
-    }
+    document.getElementById('total-price').innerText = AppState.calculateTotal();
+    document.getElementById('cart-footer').classList.toggle('hidden', AppState.calculateTotal() === 0);
 }
 
 function showCartModal() {
     const list = document.getElementById('cart-items-list');
-    list.innerHTML = "<h3>Votre Panier</h3>" + Object.entries(AppState.cart).map(([name, item]) => `
-        <div style="margin-bottom:10px;">${name} x ${item.qty} = ${item.price * item.qty} da</div>
+    list.innerHTML = "<h3>Votre Panier</h3>" + Object.entries(AppState.cart).map(([n, i]) => `
+        <div style="margin-bottom:10px;">${n} (x${i.qty}) - ${i.price * i.qty} da</div>
     `).join('');
+    document.getElementById('modal-footer').innerText = "Total: " + AppState.calculateTotal() + " da";
     document.getElementById('cart-modal').classList.remove('hidden');
 }
 
 function closeCartModal() { document.getElementById('cart-modal').classList.add('hidden'); }
 
-// استدعاء الدوال عند تحميل الصفحة
+function sendOrder() {
+    alert("Commande envoyée avec succès !");
+    AppState.cart = {};
+    AppState.save();
+    closeCartModal();
+    renderUI();
+}
+
 window.onload = renderUI;
